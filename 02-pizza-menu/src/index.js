@@ -27,18 +27,31 @@ function Menu() {
   return (
     <menu className="menu">
       <h2>Our Menu</h2>
-      <Pizza />
-      <Pizza />
+      <Pizza
+        name="Focaccia"
+        ingredients="Bread with italian olive oil and rosemary"
+        photoName="pizzas/focaccia.jpg"
+        price={6}
+      />
+      <Pizza
+        name="Pizza Margherita"
+        ingredients="Tomato and mozarella"
+        photoName="pizzas/margherita.jpg"
+        price={10}
+      />
     </menu>
   );
 }
 
-function Pizza() {
+function Pizza(props) {
   return (
     <div className="pizza">
-      <img src="pizzas/focaccia.jpg" alt="Focaccia" />
-      <h3>Focaccia</h3>
-      <p>Bread with italian olive oil and rosemary</p>
+      <img src={props.photoName} alt="Focaccia" />
+      <div>
+        <h3>{props.name}</h3>
+        <p>{props.ingredients}</p>
+        <span>{props.price}</span>
+      </div>
     </div>
   );
 }
