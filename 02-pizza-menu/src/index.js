@@ -5,7 +5,7 @@ import pizzaData from "./data.js";
 
 function App() {
   return (
-    <div>
+    <div className="container">
       <Header />
       <Menu />
       <Footer />
