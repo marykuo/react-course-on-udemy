@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./styles.css";
+import { introduction, skills } from "./data.js";
 
 function App() {
   return (
@@ -15,14 +16,14 @@ function App() {
 }
 
 function Avatar() {
-  return <img className="avatar" src="profile.png" alt="profile" />;
+  return <img className="avatar" src={introduction.photoUrl} alt="profile" />;
 }
 
 function Intro() {
   return (
     <div>
-      <h1>Mary Kuo</h1>
-      <p>I am a Java Engineer. Now service at GateWeb Information Co., Ltd.</p>
+      <h1>{introduction.name}</h1>
+      <p>{introduction.about}</p>
     </div>
   );
 }
@@ -30,19 +31,22 @@ function Intro() {
 function SkillList() {
   return (
     <div className="skill-list">
-      <Skill name="Java" emoji="💪" color="Orange" />
-      <Skill name="Spring Boot" emoji="💪" color="Orange" />
-      <Skill name="JavaScript" emoji="👶" color="Lime" />
-      <Skill name="React" emoji="👶" color="Lime" />
+      {skills.map((item) => (
+        <Skill name={item.skill} level={item.level} color={item.color} />
+      ))}
     </div>
   );
 }
 
-function Skill(props) {
+function Skill({ name, level, color }) {
   return (
-    <div className="skill" style={{ backgroundColor: props.color }}>
-      <span>{props.name}</span>
-      <span>{props.emoji}</span>
+    <div className="skill" style={{ backgroundColor: color }}>
+      <span>{name}</span>
+      <span>
+        {level === "beginner" && "👶"}
+        {level === "intermediate" && "👍"}
+        {level === "advanced" && "💪"}
+      </span>
     </div>
   );
 }
