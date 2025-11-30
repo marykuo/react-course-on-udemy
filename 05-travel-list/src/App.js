@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const initialItems = [
   { id: 1, description: "Passports", quantity: 2, packed: false },
   { id: 2, description: "Socks", quantity: 10, packed: true },
@@ -19,10 +21,43 @@ function Logo() {
 }
 
 function Form() {
+  const [description, setDesctiption] = useState("");
+  const [quantity, setQuantity] = useState(1);
+
+  function handleSubmit(e) {
+    // not to take the default action (submitting the form)
+    e.preventDefault();
+
+    if (!description) return;
+
+    const newItem = { id: Date.now(), description, quantity, packed: false };
+    // todo: add newItem to PackingList
+
+    setDesctiption("");
+    setQuantity(1);
+  }
+
   return (
-    <div className="add-form">
+    <form className="add-form" onSubmit={handleSubmit}>
       <h3>What do you need for your trip?</h3>
-    </div>
+      <select
+        value={quantity}
+        onChange={(e) => setQuantity(Number(e.target.value))}
+      >
+        {Array.from({ length: 10 }, (_, i) => i + 1).map((num) => (
+          <option value={num} key={num}>
+            {num}
+          </option>
+        ))}
+      </select>
+      <input
+        type="text"
+        placeholder="item ..."
+        value={description}
+        onChange={(e) => setDesctiption(e.target.value)}
+      />
+      <button>Add</button>
+    </form>
   );
 }
 
